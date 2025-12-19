@@ -1,0 +1,27 @@
+import pandas as pd
+
+# Sales dataset
+sales_data = {
+    "Month": ["Jan", "Feb", "Mar", "Apr", "May"],
+    "Gross_Sales": [50000, 60000, 55000, 65000, 70000],
+    "Manufacturing_Cost": [20000, 22000, 21000, 23000, 25000],
+    "Freight_Cost": [5000, 6000, 5500, 6500, 7000]
+}
+
+df = pd.DataFrame(sales_data)
+
+# Calculations
+df["Net_Sales"] = df["Gross_Sales"] - df["Manufacturing_Cost"] - df["Freight_Cost"]
+df["Profit"] = df["Net_Sales"] * 0.25
+
+print("\n📊 Sales Data Analysis:")
+print(df)
+
+# Correlation analysis
+print("\n📈 Correlation Matrix:")
+print(df.corr(numeric_only=True))
+
+# Save data
+df.to_csv("sales_analysis.csv", index=False)
+
+print("\n✅ Sales data saved as sales_analysis.csv")
