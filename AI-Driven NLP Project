@@ -1,0 +1,22 @@
+# Simple Rule-Based NLP System
+
+responses = {
+    "hello": "Hello! How can I help you?",
+    "hi": "Hi there!",
+    "what is ai": "AI stands for Artificial Intelligence.",
+    "what is nlp": "NLP means Natural Language Processing.",
+    "bye": "Goodbye! Have a nice day."
+}
+
+def chatbot(user_input):
+    user_input = user_input.lower()
+    return responses.get(user_input, "Sorry, I don't understand.")
+
+print("🤖 AI NLP Chatbot (type 'bye' to exit)")
+
+while True:
+    user = input("You: ")
+    reply = chatbot(user)
+    print("Bot:", reply)
+    if user.lower() == "bye":
+        break
