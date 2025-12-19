@@ -1,0 +1,64 @@
+import pandas as pd
+
+# -------------------------------
+# 1. DATASET CREATION
+# -------------------------------
+
+sales_data = {
+    "Month": ["Jan", "Feb", "Mar", "Apr", "May"],
+    "Gross_Sales": [50000, 60000, 55000, 65000, 70000],
+    "Manufacturing_Cost": [20000, 22000, 21000, 23000, 25000],
+    "Freight_Cost": [5000, 6000, 5500, 6500, 7000]
+}
+
+df = pd.DataFrame(sales_data)
+
+# -------------------------------
+# 2. DATA ANALYSIS
+# -------------------------------
+
+# Net Sales calculation
+df["Net_Sales"] = (
+    df["Gross_Sales"]
+    - df["Manufacturing_Cost"]
+    - df["Freight_Cost"]
+)
+
+# Profit calculation (25% margin)
+df["Profit"] = df["Net_Sales"] * 0.25
+
+print("📊 SALES DATASET\n")
+print(df)
+
+# -------------------------------
+# 3. RESEARCH QUESTIONS
+# -------------------------------
+
+print("\n📌 Research Question 1:")
+print("Which month has highest profit?")
+
+max_profit_month = df.loc[df["Profit"].idxmax()]
+print("Answer:", max_profit_month["Month"],
+      "with profit =", max_profit_month["Profit"])
+
+print("\n📌 Research Question 2:")
+print("Does manufacturing cost increase with sales?")
+
+correlation = df["Gross_Sales"].corr(df["Manufacturing_Cost"])
+print("Correlation value:", correlation)
+
+# -------------------------------
+# 4. SUMMARY STATISTICS
+# -------------------------------
+
+print("\n📈 SUMMARY STATISTICS\n")
+print(df.describe())
+
+# -------------------------------
+# 5. SAVE DATA SAFELY (CSV)
+# -------------------------------
+
+df.to_csv("sales_analysis.csv", index=False)
+
+print("\n✅ Data saved successfully as sales_analysis.csv")
+
