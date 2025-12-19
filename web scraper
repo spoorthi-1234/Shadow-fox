@@ -1,0 +1,33 @@
+# Web Scraper using built-in libraries 
+
+from urllib.request import urlopen
+from html.parser import HTMLParser
+
+class MyHTMLParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_p = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "p":
+            self.in_p = True
+
+    def handle_endtag(self, tag):
+        if tag == "p":
+            self.in_p = False
+
+    def handle_data(self, data):
+        if self.in_p:
+            print("-", data.strip())
+
+try:
+    url = "https://example.com"
+    response = urlopen(url)
+    html = response.read().decode("utf-8")
+
+    print("Paragraph Texts:")
+    parser = MyHTMLParser()
+    parser.feed(html)
+
+except Exception as e:
+    print("Error:", e)
