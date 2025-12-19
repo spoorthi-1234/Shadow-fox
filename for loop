@@ -1,0 +1,11 @@
+numbers = [10, 20, 30, 40, 50]
+print("Using for loop:")
+for num in numbers:
+    print(num)
+
+# Sum of list elements
+total = 0
+for num in numbers:
+    total += num
+
+print("Sum:", total)
