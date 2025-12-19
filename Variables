@@ -1,0 +1,18 @@
+# Variables
+name = "Spoorthi"
+age = 20
+cgpa = 8.5
+
+print("Name:", name)
+print("Age:", age)
+print("CGPA:", cgpa)
+
+# Numbers
+a = 10
+b = 3
+
+print("Addition:", a + b)
+print("Subtraction:", a - b)
+print("Multiplication:", a * b)
+print("Division:", a / b)
+print("Modulus:", a % b)
