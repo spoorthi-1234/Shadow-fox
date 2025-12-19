@@ -1,0 +1,14 @@
+# Dictionary
+student = {
+    "name": "Spoorthi",
+    "age": 20,
+    "branch": "AI",
+    "cgpa": 8.5
+}
+
+print("Student Details:")
+for key, value in student.items():
+    print(key, ":", value)
+
+# Access single value
+print("Branch:", student["branch"])
