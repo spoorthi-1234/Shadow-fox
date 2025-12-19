@@ -1,0 +1,90 @@
+import pandas as pd
+
+# -------------------------------
+# 1. DATA COLLECTION
+# -------------------------------
+
+# Fielding data for 3 players (sample T20 innings)
+data = {
+    "Ball": list(range(1, 19)),
+    "Player": [
+        "Player A", "Player B", "Player C",
+        "Player A", "Player B", "Player C",
+        "Player A", "Player B", "Player C",
+        "Player A", "Player B", "Player C",
+        "Player A", "Player B", "Player C",
+        "Player A", "Player B", "Player C"
+    ],
+    "Action": [
+        "Catch", "Stop", "Throw",
+        "Stop", "Catch", "Miss",
+        "Run Out", "Stop", "Catch",
+        "Throw", "Miss", "Stop",
+        "Catch", "Throw", "Stop",
+        "Stop", "Catch", "Miss"
+    ],
+    "Outcome": [
+        "Successful", "Successful", "Accurate",
+        "Successful", "Successful", "Failed",
+        "Successful", "Successful", "Successful",
+        "Accurate", "Failed", "Successful",
+        "Successful", "Accurate", "Successful",
+        "Successful", "Successful", "Failed"
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# -------------------------------
+# 2. DATA DISPLAY
+# -------------------------------
+
+print("📊 FIELDING DATA\n")
+print(df)
+
+# -------------------------------
+# 3. DATA ANALYSIS
+# -------------------------------
+
+# Successful actions
+print("\n📈 SUCCESSFUL ACTIONS COUNT\n")
+success_count = (
+    df[df["Outcome"].isin(["Successful", "Accurate"])]
+    .groupby("Player")
+    .size()
+)
+print(success_count)
+
+# Failed actions
+print("\n❌ FAILED ACTIONS COUNT\n")
+fail_count = (
+    df[df["Outcome"] == "Failed"]
+    .groupby("Player")
+    .size()
+)
+print(fail_count)
+
+# -------------------------------
+# 4. PERFORMANCE SUMMARY
+# -------------------------------
+
+summary = df.groupby("Player").agg(
+    Total_Actions=("Action", "count"),
+    Successful_Actions=("Outcome", lambda x: (x != "Failed").sum()),
+    Failed_Actions=("Outcome", lambda x: (x == "Failed").sum())
+)
+
+print("\n🏏 PLAYER PERFORMANCE SUMMARY\n")
+print(summary)
+
+# -------------------------------
+# 5. SAVE DATA (CSV – NO ERRORS)
+# -------------------------------
+
+df.to_csv("fielding_analysis.csv", index=False)
+summary.to_csv("fielding_summary.csv")
+
+print("\n✅ FILES SAVED SUCCESSFULLY")
+print("• fielding_analysis.csv")
+print("• fielding_summary.csv")
+
